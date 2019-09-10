@@ -11,7 +11,8 @@ class CrushReport(Resource):
 
     def post(self):
         args = request.json
-        args['created_at'] = datetime.now().strftime("Y%.M%.D/HH:MM")
+        now = datetime.now()
+        args['created_at'] = now.strftime("%m-%d-%Y %H:%M:%S")
         res = db.child("reports").push(args)
         return make_response({"message": "Incident reported"}, 201)
 
