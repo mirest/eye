@@ -22,3 +22,6 @@ def create_app(config_name):
 
 def register_blueprints(app):
     app.register_blueprint(users)
+
+
+#  {% comment %} url_for('static', filename='iot.css', v=0.01) {% endcomment %}
