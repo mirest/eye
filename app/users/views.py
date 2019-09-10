@@ -4,8 +4,10 @@ from sqlalchemy import exc
 
 from app.database import db
 
+
 class CreateAccount(Resource):
     """Resource for creating an account"""
+
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('username')
@@ -33,3 +35,7 @@ class CreateAccount(Resource):
             check_user = 0
             if check_user:
                 return make_response({"message": "User already exists"}, 403)
+
+    def get(self):
+        response = db.child('users').get()
+        return response.val()
