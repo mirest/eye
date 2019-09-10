@@ -12,23 +12,21 @@ class CreateAccount(Resource):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('username')
         self.reqparse.add_argument('phone_number')
-        self.reqparse.add_argument('device_tag')
+        self.reqparse.add_argument('device_tags')
         self.reqparse.add_argument('alert_receivers')
-        self.reqparse.add_argument('tags')
 
     def post(self):
         args = self.reqparse.parse_args()
         username = args['username']
         phone_number = args['phone_number']
-        device_tag = args['device_tag']
+        device_tags = args['device_tags']
         alert_receivers = args['alert_receivers']
         tags = args['tags']
         user = {
             "username": username,
             "phone_number": phone_number,
-            "device_tag": device_tag,
+            "device_tags": device_tags,
             "alert_receivers": alert_receivers,
-            "tag": tags
         }
         try:
             db.child("users").push(user)
