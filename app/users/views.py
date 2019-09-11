@@ -1,6 +1,5 @@
 from flask_restful import Resource, reqparse
 from flask import make_response
-from sqlalchemy import exc
 
 from app.database import db
 
@@ -10,35 +9,38 @@ class CreateAccount(Resource):
 
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('username')
-        self.reqparse.add_argument('phone_number')
-        self.reqparse.add_argument('device_tag')
-        self.reqparse.add_argument('alert_receivers')
-        self.reqparse.add_argument('tags')
+        self.reqparse.add_argument('username', required=True)
+        self.reqparse.add_argument('phone_number', required=True,)
+        self.reqparse.add_argument(
+            'device_tags', required=True, action='append')
+        self.reqparse.add_argument(
+            'alert_receivers', required=True, action='append')
 
     def post(self):
         args = self.reqparse.parse_args()
         username = args['username']
         phone_number = args['phone_number']
-        device_tag = args['device_tag']
+        device_tags = args['device_tags']
         alert_receivers = args['alert_receivers']
-        tags = args['tags']
+
         user = {
             "username": username,
             "phone_number": phone_number,
-            "device_tag": device_tag,
-            "alert_receivers": alert_receivers,
-            "tag": tags
+            "alert_receivers": alert_receivers
         }
         try:
-            db.child("users").push(user)
+            res = db.child('users').push(user)
+            tags = self.tags(device_tags, res.get('name'))
+            db.child('devices').set(tags)
             return make_response(
                 {"message": "Your account has been created succesfully"}, 201)
-        except exc.IntegrityError:
-            check_user = 0
-            if check_user:
-                return make_response({"message": "User already exists"}, 403)
+        except Exception as error:
+            return make_response({"message": "User already exists"}, 403)
 
     def get(self):
         response = db.child('users').get()
         return response.val()
+
+    @staticmethod
+    def tags(tags, key):
+        return {tag: key for tag in tags}

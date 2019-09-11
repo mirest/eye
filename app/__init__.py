@@ -2,6 +2,13 @@ from flask import Flask
 
 from app.config import app_config
 from app.users import users
+from apscheduler.schedulers.background import BackgroundScheduler
+
+
+def registerschedule(app):
+    scheduler = BackgroundScheduler()
+    app.apscheduler = scheduler
+    scheduler.start()
 
 
 def create_app(config_name):
@@ -9,6 +16,7 @@ def create_app(config_name):
     conf = app.config.from_object(app_config)
     app.config.from_pyfile('config.py')
     register_blueprints(app)
+    registerschedule(app)
     return app
 
 
