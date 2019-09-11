@@ -30,7 +30,7 @@ def sendsms(tag, location):
     url = f"https://www.google.com/maps?q={location.get('latitude')},{location.get('longitude')}"
     messenger = MessageClient()
     user_to_in_danger = get_user(tag)
-    body = f"ALERT !!!!\n{user_to_in_danger.get('username')} might be danger\nContact them on phone number {user_to_in_danger.get('phone_number')}\nUser is at location {url}"  # noqa
+    body = f"ALERT !!!!\n{user_to_in_danger.get('username')} might be in danger\nContact them on phone number {user_to_in_danger.get('phone_number')}\nUser is at location {url}"  # noqa
     for number in user_to_in_danger.get('alert_receivers'):
         messenger.send_message(body, to=number)
 
