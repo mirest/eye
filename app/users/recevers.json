@@ -1,0 +1,12 @@
+[
+  {
+    "table": "alertreceivers",
+    "id": 1,
+    "receivers": 78909856
+  },
+  {
+    "table": "alertreceivers",
+    "id": 2,
+    "receivers": 90987675
+  }
+]
