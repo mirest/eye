@@ -8,7 +8,6 @@ from app.database import db
 
 class CrushReport(Resource):
     """Resource for creating an account"""
-
     def post(self):
         args = request.json
         now = datetime.now()
@@ -17,7 +16,8 @@ class CrushReport(Resource):
         tag = args.get('device_tag')
         current_app.apscheduler.add_job(func=sendsms,
                                         trigger='date',
-                                        args=[tag, args.get('location')], id='j'+str(res.get('name')))
+                                        args=[tag, args.get('location')],
+                                        id='j' + str(res.get('name')))
 
         return make_response({"message": "Incident reported"}, 201)
 
@@ -36,8 +36,8 @@ def sendsms(tag, location):
 
 
 def get_user(tag):
-    uid = db.child('devices/'+tag).get().val()
+    uid = db.child('devices/' + tag).get().val()
     if uid:
-        return db.child('users/'+uid).get().val()
+        return db.child('users/' + uid.get('owner')).get().val()
     else:
         raise ValueError('not found')

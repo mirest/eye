@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="static/iot.css"/>
+    <title>Hackathon</title>
+</head>
+    <section class="container">
+        <div class="form">
+            <h1>iSafe</h1>
+                <table border="1">
+    <thead>
+        <tr>
+            <th>alert_receivers</th>
+            <th>phone_number</th>
+            <th>username</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users.values() %}
+        <tr>
+            {% for col in user %}
+            <td>{{ user[col] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+        </div>
+    </section>
+</body>
+</html>
