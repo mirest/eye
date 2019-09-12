@@ -12,6 +12,7 @@ class MessageClient:
     - The number must be verified for this
     x.send_message('dfds', '+256785372391')
     """
+
     def __init__(self):
         logger.debug('Initializing messaging client')
 
@@ -26,12 +27,14 @@ class MessageClient:
         logger.debug('Twilio client initialized')
 
     def send_message(self, body, to):
-        self.twilio_client.messages.create(
-            body=body,
-            to=to,
-            from_=self.twilio_number,
-        )
-
+        try:
+            self.twilio_client.messages.create(
+                body=body,
+                to=to,
+                from_=self.twilio_number,
+            )
+        except Exception:
+            pass
 
 def load_twilio_config():
     logger.debug('Loading Twilio configuration')
