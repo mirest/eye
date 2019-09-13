@@ -7,12 +7,12 @@ body {
 
 /*    ----    css for the form  ----   */
 .container {
-  height: 100vh; 
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: #DBDBDB;
+  background: #dbdbdb;
 }
 h1 {
   color: #e26b0b;
