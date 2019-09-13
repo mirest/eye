@@ -19,14 +19,21 @@ h1 {
   font-size: 50px;
 }
 .form {
-  width: 377px;
+  width: 450px;
   padding: 50px;
   background: #fff;
 }
+
 .form .input-box {
   margin: 20px 0;
 }
+.form .col .input-box {
+  display: inline-block;
+  padding: 0;
+  margin-top: 0;
+}
 .form .input-box input,
+.form .col .input-box input,
 .form .input-box select,
 .form .input-box select option {
   width: 100%;
