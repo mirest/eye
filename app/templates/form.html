@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="static/iot.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='iot.css') }}"/>
     <title>Hackathon</title>
 </head>
     <section class="container">
@@ -18,16 +17,25 @@
                 </div>
                 <div class="input-box">
                     <select name="tag">
-                        <option value="device1">device1</option>
                         <option value="device2">device2</option>
                         <option value="device3">device3</option>
                     </select>
                 </div>
-                <div class="input-box">
-                    <input type="tel" name="Alert Receiver1" placeholder="Alert Receiver1" pattern ="+[0-9]{10,11}" required>
+                <div class="col">
+                    <div class="input-box">
+                        <input type="tel" name="Alert Receiver1" placeholder="Alert Receiver1" pattern ="+[0-9]{10,11}" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="tel" name="Alert Receiver2" placeholder="Alert Receiver2" pattern ="+[0-9]{10,11}" required>
+                    </div>
                 </div>
-                <div class="input-box">
-                    <input type="tel" name="Alert Receiver2" placeholder="Alert Receiver2" pattern ="+[0-9]{10,11}" required>
+                <div class="col">
+                    <div class="input-box">
+                        <input type="tel" name="Alert Receiver1" placeholder="Alert Receiver1" pattern ="+[0-9]{10,11}" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="tel" name="Alert Receiver2" placeholder="Alert Receiver2" pattern ="+[0-9]{10,11}" required>
+                    </div>
                 </div>
                 <div class="input-box">
                     <input type="submit" name="submit" value="Submit">
